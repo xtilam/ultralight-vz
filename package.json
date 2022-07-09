@@ -1,0 +1,22 @@
+{
+  "name": "ultralight-au3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node dev/dev.js",
+    "build": "node dev/build.js",
+    "gui": "cd %cd%/gui && npm run start"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.8.6",
+    "colors": "^1.4.0",
+    "filewatcher": "^3.0.1",
+    "javascript-obfuscator": "^4.0.0",
+    "md5": "^2.3.0",
+    "nodemon": "^2.0.16"
+  }
+}

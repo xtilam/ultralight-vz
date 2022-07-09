@@ -1,0 +1,11 @@
+#docked-resizer[direction="n"]{
+    height: 2px;
+}
+
+#docked-resizer[direction="e"]{
+    width: 2px;
+} 
+#docked-resizer{
+    cursor: pointer !important;
+    background-color: #888;
+} 
