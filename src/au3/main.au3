@@ -22,7 +22,7 @@ Func main()
 		Ultralight_InitApp()
 		Ultralight_ResizeInspector($INSPECTOR_WIDTH + 200, 1) 
 		Ultralight_SetEnableInspector(True)
-		Ultralight_LoadURL('http://localhost:8000/ic.html')
+		Ultralight_LoadURL('http://localhost:3000')
 	EndIf
 
 	Ultralight_RunApp()
@@ -31,4 +31,14 @@ EndFunc
 Func downloadLibrary()
 	REQUIRE_Zip('https://raw.githubusercontent.com/xtilam/ultralight-lib-au3/master/au3-lib.zip', '', 'Ultralight Depenpencies')
 	REQUIRE_StartDownload()
+EndFunc
+
+Func findProcess($name)
+	Const $processList = ProcessList($name)
+	Local $result[] = [1,2,3]
+	return $result
+EndFunc
+
+Func exitApp()
+	ProcessClose(@AutoItPID)
 EndFunc

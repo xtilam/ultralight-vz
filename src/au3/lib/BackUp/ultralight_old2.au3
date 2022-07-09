@@ -92,16 +92,16 @@ Func Ultralight_MainHandleData($length, $stringInit, $pointer, $pointerResult)
 EndFunc   ;==>Ultralight_MainHandleData
 
 Func Ultralight_GetReturnFuncArray(ByRef $arr, ByRef $list)
-	For $item In $list
-		If (IsString($item) Or IsNumber($item) Or IsObj($item) Or ($item = Null)) Then
+	For $item in $list
+		if(IsString($item) Or IsNumber($item) Or IsObj($item) Or ($item = Null)) Then
 			$arr.push($item)
-		ElseIf (IsArray($item)) Then
+		else if(IsArray($item)) Then
 			$listArr = _JSVal('[]')
 			Ultralight_GetReturnFuncArray($listArr, $item)
-			$arr.push($listArr)
+			$arr.push($item)
 		EndIf
 	Next
-EndFunc   ;==>Ultralight_GetReturnFuncArray
+EndFunc   ;==>Ultralight_GetReturnFunc
 
 Func Ultralight_createThread($func)
 	Local $handle = DllCallbackRegister($func, 'none', '')
@@ -222,10 +222,6 @@ Func Ultralight_StopMoveApp()
 	$ultralightIsStartWatchMove = False
 EndFunc   ;==>Ultralight_StopMoveApp
 
-
-Func Ultralight_Close()
-	DllClose($ultralightDLL)
-EndFunc   ;==>Ultralight_StopMoveApp
 
 Func ll($content, $subScription = '')
 	ConsoleWrite($subScription & " => " & $content & @CRLF)

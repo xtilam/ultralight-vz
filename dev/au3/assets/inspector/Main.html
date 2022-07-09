@@ -894,7 +894,7 @@
     <script src="Debug/Bootstrap.js"></script>
     <script src="Debug/CapturingProtocolTracer.js"></script>
     <script src="Debug/ProtocolTrace.js"></script>
-    <script src="Debug/DebugContentView.js"></script> 
+    <script src="Debug/DebugContentView.js"></script>
 
     <script src="WebKitAdditions/WebInspectorUI/WebInspectorUIAdditions.js"></script>
     <link rel="stylesheet" href="resize.css">
@@ -932,7 +932,6 @@
             await waitStart()
             console.log('start inspector')
 
-            
             const dockRight = document.querySelector('.dock-right')
             const dockBottom = document.querySelector('.dock-bottom')
             const resizeBar = document.querySelector('#docked-resizer')
@@ -942,35 +941,35 @@
                 resizeBar.setAttribute('direction', 'e')
             })
             dockBottom.addEventListener('click', function () {
-                setInspectorDirection(false) 
+                setInspectorDirection(false)
                 resizeBar.setAttribute('direction', 'n')
-            }) 
-            window.addEventListener('mouseup', function(){
-                console.log('stop resize inspector') 
+            })
+            window.addEventListener('mouseup', function () {
+                console.log('stop resize inspector')
                 clearInterval(updateInspectorInterval)
                 stopResizeInspector()
             })
-            resizeBar.addEventListener('mousedown', function(){
-                console.log('start resize inspector') 
+            resizeBar.addEventListener('mousedown', function () {
+                console.log('start resize inspector')
                 startResizeInspector()
-                updateInspectorInterval = setInterval(()=>{
+                updateInspectorInterval = setInterval(() => {
                     updateInspectorWidth()
                 }, 1)
             })
-            
-            if(config.location.isRight){
+
+            if (config.location.isRight) {
                 dockRight.click()
-            }else{
+            } else {
                 dockBottom.click()
             }
 
-            document.querySelector('input[autosave="inspector-search-autosave"]').addEventListener('click', function(){
+            document.querySelector('input[autosave="inspector-search-autosave"]').addEventListener('click', function () {
                 window.location.reload()
             })
         }
 
         function waitStart() {
-            return new Promise((resolve) => { 
+            return new Promise((resolve) => {
                 const interval = setInterval(() => {
                     if (!window.config) return
                     resolve()
@@ -978,9 +977,9 @@
                 }, 100)
             })
         }
- 
+
         document.onclick = function (evt) {
-            // console.log('target click => ' + evt.target.outerHTML)
+            console.log('target click => ' + evt.target.outerHTML)
         }
     </script>
 </body>

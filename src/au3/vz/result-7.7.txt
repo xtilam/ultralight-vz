@@ -1,0 +1,11 @@
+League of Legends.exe+P01868D04,276,116,992
+League of Legends.exe+P01868D04,276,492,608
+League of Legends.exe+P01868D04,276,540,992
+League of Legends.exe+P01868D04,276,752,992
+League of Legends.exe+P01868D04,276,824,932
+League of Legends.exe+P01868D04,276,836,548
+League of Legends.exe+P01868D04,276,916,296
+League of Legends.exe+P01868D04,276,964,992
+League of Legends.exe+P01868D08,12,8,220
+
+League of Legends.exe+P01868D80,272,644,616

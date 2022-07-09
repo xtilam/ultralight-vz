@@ -71,16 +71,20 @@ Func Ultralight_MainHandleData($length, $stringInit, $pointer, $pointerResult)
 	Local $result = Execute('Call(' & StringTrimLeft($call, 1) & ')')
 
 	If (@error <> 0) Then Return
+	
+EndFunc   ;==>Ultralight_MainHandleData
 
-	Switch (VarGetType($result))
+Func Ultralight_GetReturnFunc(Byref $val, $pointer, $isRecursive = False)
+Switch (VarGetType($result))
 		Case 'String'
 			DllCall($ultralightDLL, 'none', 'makeString', 'ptr', $pointerResult, 'wstr', $result)
 		Case 'Object'
 			DllCall($ultralightDLL, 'none', 'makeObject', 'ptr', $pointerResult, 'wstr', $result.json())
 		Case 'Array'
-			Local $listResult = _JSVal('[]')
-			Ultralight_GetReturnFuncArray($listResult, $result)
-			DllCall($ultralightDLL, 'none', 'makeObject', 'ptr', $pointerResult, 'wstr', $listResult.json())
+			Local $listResult =_JSVal('[]')
+			For $item in $result
+				
+			Next
 		Case Else
 			If (IsNumber($result)) Then
 				DllCall($ultralightDLL, 'none', 'makeNumber', 'ptr', $pointerResult, 'double', $result)
@@ -88,20 +92,7 @@ Func Ultralight_MainHandleData($length, $stringInit, $pointer, $pointerResult)
 				DllCall($ultralightDLL, 'none', 'makeNull', 'ptr', $pointerResult)
 			EndIf
 	EndSwitch
-
-EndFunc   ;==>Ultralight_MainHandleData
-
-Func Ultralight_GetReturnFuncArray(ByRef $arr, ByRef $list)
-	For $item In $list
-		If (IsString($item) Or IsNumber($item) Or IsObj($item) Or ($item = Null)) Then
-			$arr.push($item)
-		ElseIf (IsArray($item)) Then
-			$listArr = _JSVal('[]')
-			Ultralight_GetReturnFuncArray($listArr, $item)
-			$arr.push($listArr)
-		EndIf
-	Next
-EndFunc   ;==>Ultralight_GetReturnFuncArray
+EndFunc
 
 Func Ultralight_createThread($func)
 	Local $handle = DllCallbackRegister($func, 'none', '')
@@ -198,7 +189,7 @@ Func Ultralight_FreeCallback($id)
 EndFunc   ;==>Ultralight_FreeCallback
 
 Func Ultralight_StartMoveApp()
-	If ($ultralightIsStartWatchMove) Then Return
+	if($ultralightIsStartWatchMove) Then Return
 	Local $pos = MouseGetPos()
 	Local $winPos = WinGetPos(Ultralight_GetWindowHandle(), '')
 	$ultralightOldLocationX = $pos[0]
@@ -222,10 +213,6 @@ Func Ultralight_StopMoveApp()
 	$ultralightIsStartWatchMove = False
 EndFunc   ;==>Ultralight_StopMoveApp
 
-
-Func Ultralight_Close()
-	DllClose($ultralightDLL)
-EndFunc   ;==>Ultralight_StopMoveApp
 
 Func ll($content, $subScription = '')
 	ConsoleWrite($subScription & " => " & $content & @CRLF)
