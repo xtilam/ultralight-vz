@@ -1,0 +1,12 @@
+.App {
+
+}
+
+#app-bar{
+    #window-buttons > button{
+        border-radius: 0px !important;
+        width: 60px !important;
+        height: 35px !important;
+        min-width: unset !important;
+    }
+}
