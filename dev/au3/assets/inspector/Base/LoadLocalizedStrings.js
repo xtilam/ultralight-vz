@@ -70,7 +70,7 @@ WI.UIString = function(string, key, comment)
         this._missingLocalizedStrings[key] = true;
     }
 
-    return "STR!";
+    return "LOCALIZED STRING NOT FOUND";
 };
 
 WI.repeatedUIString = {};

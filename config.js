@@ -2,7 +2,8 @@ const path = require('path')
 
 module.exports = {
     dllBuildPath: [
-        "C:/Users/ztila/source/repos/AU3_Utralight/x64/Debug/AU3Utralight.dll"
+        "C:/Users/ztila/source/repos/AU3_Utralight/x64/Release/AU3Utralight.dll",
+        "C:/Users/ztila/source/repos/AU3_Utralight/x64/Debug/AU3Utralight.dll",
     ],
     mainAU3: path.join(__dirname, '/src/au3/main.au3'),
     autoCleanDLLBuild: true,

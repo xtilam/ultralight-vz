@@ -9,10 +9,6 @@
     "gui": "cd %cd%/gui && npm run start"
   },
   "dependencies": {
-    "@emotion/react": "^11.9.3",
-    "@emotion/styled": "^11.9.3",
-    "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.8.6",
     "colors": "^1.4.0",
     "filewatcher": "^3.0.1",
     "javascript-obfuscator": "^4.0.0",

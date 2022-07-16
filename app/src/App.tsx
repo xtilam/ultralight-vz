@@ -1,19 +1,20 @@
-import { Button } from '@mui/material';
-import React from 'react';
-import './App.scss';
-import { au3Action } from './au3/au3';
+import React, { useState } from 'react';
+import './sass/App.scss';
 import { AppBarButton } from './components/AppBarButton';
 
+
 function App() {
+  const [href, setHref] = useState(window.location.href)
+
   return (
     <div className="App">
-      <AppBarButton/>
-      <Button onClick={()=>{
-        const result = au3Action.findProcess('League of Legends.exe')
-        console.log(result)
-      }}>findProcess</Button>
+      <AppBarButton />
+      {/* <div>href: <a>{href}</a></div>
+      <Button variant='contained' onClick={() => {
+        setHref(window.location.href)
+      }}>This is button 2</Button> */}
     </div>
   );
 }
-
+ 
 export default App;

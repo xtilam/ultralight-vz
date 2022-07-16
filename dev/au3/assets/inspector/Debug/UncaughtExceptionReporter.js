@@ -292,7 +292,6 @@ Document any additional information that might be useful in resolving the proble
     </h2>
     <p><ul>${detailsForHTML}</ul></p>
     </div>`;
-    window.location.reload()
     sheetElement.addEventListener("click", handleLinkClick, true);
     document.body.appendChild(sheetElement);
 }

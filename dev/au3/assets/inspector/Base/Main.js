@@ -1798,7 +1798,7 @@ WI._dockLeft = function(event)
 WI._togglePreviousDockConfiguration = function(event)
 {
     InspectorFrontendHost.requestSetDockSide(WI._previousDockConfiguration);
-}; 
+};
 
 WI._updateDockNavigationItems = function()
 {

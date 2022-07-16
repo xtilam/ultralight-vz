@@ -1,0 +1,15 @@
+/*!************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/sass/App.scss ***!
+  \************************************************************************************************************/
+html {
+  cursor: -webkit-zoom-in;
+}
+
+#app-bar #window-buttons > button {
+  border-radius: 0px !important;
+  width: 60px !important;
+  height: 35px !important;
+  min-width: unset !important;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLmNzcyIsIm1hcHBpbmdzIjoiOzs7QUFBQTtFQUNJO0FBQ0o7O0FBR0k7RUFDSTtFQUNBO0VBQ0E7RUFDQTtBQUFSLEMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9hcHAvLi9zcmMvc2Fzcy9BcHAuc2NzcyJdLCJzb3VyY2VzQ29udGVudCI6WyJodG1se1xyXG4gICAgY3Vyc29yOiAtd2Via2l0LXpvb20taW47XHJcbn1cclxuXHJcbiNhcHAtYmFye1xyXG4gICAgI3dpbmRvdy1idXR0b25zID4gYnV0dG9ue1xyXG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDBweCAhaW1wb3J0YW50O1xyXG4gICAgICAgIHdpZHRoOiA2MHB4ICFpbXBvcnRhbnQ7XHJcbiAgICAgICAgaGVpZ2h0OiAzNXB4ICFpbXBvcnRhbnQ7XHJcbiAgICAgICAgbWluLXdpZHRoOiB1bnNldCAhaW1wb3J0YW50O1xyXG4gICAgfVxyXG59XHJcbiJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==*/

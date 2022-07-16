@@ -897,7 +897,7 @@
     <script src="Debug/DebugContentView.js"></script>
 
     <script src="WebKitAdditions/WebInspectorUI/WebInspectorUIAdditions.js"></script>
-    <link rel="stylesheet" href="resize.css">
+
     <script>
         WI.sharedApp = new WI.AppController;
         WI.sharedApp.initialize();
@@ -917,7 +917,6 @@
         <div id="console-drawer" class="hidden"></div>
         <div id="quick-console"></div>
     </div>
-
     <script>
         async function loc(...args) {
             window.au3('ConsoleWrite', args.toString() + '\n')
@@ -930,12 +929,15 @@
 
         async function start() {
             await waitStart()
-            console.log('start inspector')
 
             const dockRight = document.querySelector('.dock-right')
             const dockBottom = document.querySelector('.dock-bottom')
             const resizeBar = document.querySelector('#docked-resizer')
+            document.querySelector('.undock').style.display = 'none'
+            document.querySelector('svg use[*|href="Images/Close.svg#root"]').style.display = 'none'
+            
             let updateInspectorInterval;
+
             dockRight.addEventListener('click', function () {
                 setInspectorDirection(true)
                 resizeBar.setAttribute('direction', 'e')
@@ -945,12 +947,10 @@
                 resizeBar.setAttribute('direction', 'n')
             })
             window.addEventListener('mouseup', function () {
-                console.log('stop resize inspector')
                 clearInterval(updateInspectorInterval)
                 stopResizeInspector()
             })
             resizeBar.addEventListener('mousedown', function () {
-                console.log('start resize inspector')
                 startResizeInspector()
                 updateInspectorInterval = setInterval(() => {
                     updateInspectorWidth()
@@ -962,10 +962,6 @@
             } else {
                 dockBottom.click()
             }
-
-            document.querySelector('input[autosave="inspector-search-autosave"]').addEventListener('click', function () {
-                window.location.reload()
-            })
         }
 
         function waitStart() {
@@ -975,11 +971,7 @@
                     resolve()
                     clearTimeout(interval)
                 }, 100)
-            })
-        }
-
-        document.onclick = function (evt) {
-            console.log('target click => ' + evt.target.outerHTML)
+            }) 
         }
     </script>
 </body>

@@ -152,14 +152,6 @@ Func Ultralight_MoveWindow($x, $y)
 	WinMove($Ultralight_WHWND, '', $x, $y, $aPos[2], $aPos[3])
 EndFunc   ;==>Ultralight_MoveWindow
 
-Func Ultralight_ResizeInspector($width, $direction = 0)
-	DllCall($ultralightDLL, 'none', 'resizeInspector', 'int', $direction, 'short', $width)
-EndFunc   ;==>Ultralight_ResizeInspector
-
-Func Ultralight_SetEnableInspector($isEnable = False)
-	DllCall($ultralightDLL, 'none', 'setEnableInspector', 'bool', $isEnable)
-EndFunc   ;==>Ultralight_SetEnableInspector
-
 Func Ultralight_SetWindowTitle($title = '')
 	DllCall($ultralightDLL, 'none', 'setTitle', 'str', $title)
 EndFunc   ;==>Ultralight_SetWindowTitle
@@ -197,39 +189,15 @@ Func Ultralight_FreeCallback($id)
 	_JS_onThreadDeath()
 EndFunc   ;==>Ultralight_FreeCallback
 
-Func Ultralight_StartMoveApp()
-	If ($ultralightIsStartWatchMove) Then Return
-	Local $pos = MouseGetPos()
-	Local $winPos = WinGetPos(Ultralight_GetWindowHandle(), '')
-	$ultralightOldLocationX = $pos[0]
-	$ultralightOldLocationY = $pos[1]
-	$ultralightOldWidth = $winPos[0]
-	$ultralightOldHeight = $winPos[1]
-	$ultralightIsStartWatchMove = True
-	Ultralight_createThread(Ultralight_StartMoveAppThread)
-EndFunc   ;==>Ultralight_StartMoveApp
-
-Func Ultralight_StartMoveAppThread()
-	While ($ultralightIsStartWatchMove)
-		Local $pos = MouseGetPos()
-		Local $x = $ultralightOldWidth + $pos[0] - $ultralightOldLocationX
-		Local $y = $ultralightOldHeight + $pos[1] - $ultralightOldLocationY
-		Ultralight_MoveWindow($x, $y)
-	WEnd
-EndFunc   ;==>Ultralight_StartMoveAppThread
-
-Func Ultralight_StopMoveApp()
-	$ultralightIsStartWatchMove = False
-EndFunc   ;==>Ultralight_StopMoveApp
-
-
 Func Ultralight_Close()
 	DllClose($ultralightDLL)
 EndFunc   ;==>Ultralight_StopMoveApp
 
+Func Ultralight_IsDevMode()
+	Ultralight_LoadDLL()
+	return DllCall($ultralightDLL, "bool", "isDevMode")[0]
+EndFunc
+
 Func ll($content, $subScription = '')
 	ConsoleWrite($subScription & " => " & $content & @CRLF)
 EndFunc   ;==>ll
-
-
-

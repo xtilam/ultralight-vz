@@ -56,6 +56,8 @@ async function main() {
         if (fs.existsSync(includePath)) fs.rmSync(includePath, { recursive: true })
         fs.copyFileSync(path.join(au3Config.autoITPath, 'AutoIt3_x64.exe'), path.join(localAu3Path, 'AutoIt3_x64.exe'))
         fs.copyFileSync(path.join(au3Config.autoITPath, 'AutoIt3.exe'), path.join(localAu3Path, 'AutoIt3.exe'))
+        fs.copyFileSync(path.join(au3Config.autoITPath, 'Au3Check.exe'), path.join(localAu3Path, 'Au3Check.exe'))
+        fs.copyFileSync(path.join(au3Config.autoITPath, 'Au3Check.dat'), path.join(localAu3Path, 'Au3Check.dat'))
         if (!fs.existsSync(path.dirname(autoIt3WrapperAu3Path))) fs.mkdirSync(path.dirname(autoIt3WrapperAu3Path), { recursive: true })
         fs.copyFileSync(path.join(au3Config.autoITPath, 'SciTE/AutoIt3Wrapper/AutoIt3Wrapper.au3'), autoIt3WrapperAu3Path)
         copyRecursiveSync(path.join(au3Config.autoITPath, 'Include'), includePath)

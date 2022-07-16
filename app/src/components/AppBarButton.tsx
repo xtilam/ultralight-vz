@@ -1,21 +1,19 @@
-import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import { constants } from '../constants/constants';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import React from 'react';
 import { au3Action } from '../au3/au3';
+import { constants } from '../constants/constants';
 import { ExitSVG } from '../svg/exitSVG';
-import { ButtonGroup } from '@mui/material';
 
 export function AppBarButton() {
     return (
         <Box sx={{ flexGrow: 1 }}
-            onMouseDown={au3Action.ultralight.startMoveWindow}
-            onMouseUp={au3Action.ultralight.stopMoveWindow}
+            onMouseDown={window.startMoveWindow}
+            onMouseUp={window.stopMoveWindow}
             id="app-bar"
         >
             <AppBar position="static">
@@ -27,7 +25,7 @@ export function AppBarButton() {
                         aria-label="menu"
                         sx={{ mr: 2 }}
                     >
-                        <MenuIcon />
+                        {/* <MenuIcon /> */}
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         {constants.appName + ' ' + constants.version}

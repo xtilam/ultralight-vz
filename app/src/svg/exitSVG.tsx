@@ -1,4 +1,5 @@
 import { BaseSVGProps } from "./BaseSVG";
+import React from "react"
 
 export function ExitSVG(props: BaseSVGProps = {}) {
     const configs = {} as any
