@@ -2,7 +2,6 @@ const { execSync, spawn, exec } = require('child_process')
 const filewatcher = require('filewatcher')
 const fs = require('fs')
 const path = require('path')
-const { dllBuildPath } = require('../config')
 const au3Config = require('../config')
 const nodemon = require('nodemon')
 const { exit } = require('process')
@@ -20,7 +19,7 @@ async function main() {
 
 
     copyAu3Execute()
-    watchBuildDLL()
+    watchOtherBuild()
     watchAU3()
 
 
@@ -63,25 +62,36 @@ async function main() {
         copyRecursiveSync(path.join(au3Config.autoITPath, 'Include'), includePath)
     }
 
-    async function watchBuildDLL() {
+    async function watchOtherBuild() {
         const watcherBuildDLL = new filewatcher()
 
-        for (const dll of dllBuildPath) {
-            fs.existsSync(dll) && await copyDLLBuild(dll)
-            watcherBuildDLL.add(dll)
+        const listBuild = {}
+
+        for (const buildPath of au3Config.otherBuildChange) {
+            let source, dest;
+
+            if (Array.isArray(buildPath)) {
+                source = buildPath[0]
+                dest = buildPath[1]
+            }
+            else {
+                source = buildPath
+                dest = path.join(path.dirname(au3Config.mainAU3), 'bin', path.basename(source))
+            }
+
+            fs.existsSync(source) && await copyFileBuild(source, dest)
+            
+            listBuild[source] = dest
+            watcherBuildDLL.add(source)
         }
 
         watcherBuildDLL.on('change', async function (dir) {
-            console.log('dll change')
-            await copyDLLBuild(dir)
+            await copyFileBuild(dir, listBuild[dir])
         })
 
 
-        function copyDLLBuild(dir, maxTime = 10000) {
-            const dllBinFolder = path.join(path.dirname(au3Config.mainAU3), 'bin')
-
-            const dest = path.join(dllBinFolder, path.basename(dir))
-            if (!fs.existsSync(dllBinFolder)) fs.mkdirSync(dllBinFolder, { recursive: true })
+        function copyFileBuild(source, dest, maxTime = 10000) {
+            if (!fs.existsSync(path.dirname(dest))) fs.mkdirSync(path.dirname(dest), { recursive: true })
 
             const startTime = (new Date()).getTime()
 
@@ -90,13 +100,13 @@ async function main() {
                 const now = (new Date()).getTime()
 
                 if (now - startTime > maxTime) return clearTimeout(localInterval)
-                if (!fs.existsSync(dir)) return clearTimeout(localInterval)
+                if (!fs.existsSync(source)) return clearTimeout(localInterval)
 
                 try {
                     au3Process && au3Process.kill()
-                    console.log('clear build dll', dir)
+                    console.log('clear build dll', source)
                     fs.existsSync(dest) && fs.rmSync(dest)
-                    fs.copyFileSync(dir, dest)
+                    fs.copyFileSync(source, dest)
                     startApp()
                     clearTimeout(localInterval)
                     console.log('=> dll file copy successfully'.green.green.bold)
